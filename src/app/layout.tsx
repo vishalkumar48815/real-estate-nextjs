@@ -15,11 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <SpeedInsights />
-        <Navbar />
-        {children}
-      </body>
+      <head>
+      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-192x192.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-512x512.png" />
+      </head>
+        <body>
+          <SpeedInsights />
+          <Navbar />
+          {children}
+        </body>
     </html>
   );
 }
