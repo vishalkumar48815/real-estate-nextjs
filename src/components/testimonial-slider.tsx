@@ -5,11 +5,9 @@ import { ShimmerButton } from "./magicui/shimmer-button";
 import ReviewCard from "./review-card";
 import { reviews } from "@/lib/data/testimonials";
 import { BorderBeam } from "./magicui/border-beam";
-import { Button } from "./ui/button";
 
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
-
 
 export function TestimonialSlider() {
     return (

@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="bg-[#f5f5f5] text-black">
-      <div className="bg-[#030722] text-white text-xs sm:text-sm py-3 px-6 flex flex-col sm:flex-row justify-between items-center">
+      <div className="bg-neutral-600 text-white text-xs sm:text-sm py-3 px-6 flex flex-col sm:flex-row justify-between items-center">
         <p>TrustNext Copyright 2024, All Rights Reserved.</p>
         <div className="flex gap-4 mt-2 sm:mt-0">
           <a href="#" className="hover:underline">Privacy Policy</a>

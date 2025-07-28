@@ -1,15 +1,18 @@
 import { cn } from "@/lib/utils";
+import { Star } from "lucide-react";
 
- const ReviewCard = ({
+const ReviewCard = ({
     img,
     name,
     username,
-    body,
+    feedback,
+    rating
 }: {
     img: string;
     name: string;
     username: string;
-    body: string;
+    feedback: string;
+    rating: number | string
 }) => {
     return (
         <figure
@@ -27,10 +30,15 @@ import { cn } from "@/lib/utils";
                     <figcaption className="text-sm font-medium dark:text-white">
                         {name}
                     </figcaption>
-                    <p className="text-xs font-medium dark:text-white/40">{username}</p>
+                    <p className="text-xs font-medium text-slate-600">@{username}</p>
                 </div>
             </div>
-            <blockquote className="mt-2 text-sm">{body}</blockquote>
+            <blockquote className="mt-2 text-sm">{feedback}</blockquote>
+            <div className="flex mt-2 text-yellow-500">
+                {Array.from({ length: Number(rating) }).map((_, i) => (
+                    <Star key={i} size={16} fill="currentColor" stroke="none" />
+                ))}
+            </div>
         </figure>
     );
 };
