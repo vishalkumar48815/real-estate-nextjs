@@ -17,6 +17,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@react-icons/all-files": "^4.1.0",
+    "@vercel/speed-insights": "^1.2.0",
     "antd": "^5.26.5",
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
