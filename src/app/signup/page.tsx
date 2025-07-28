@@ -30,8 +30,8 @@ export default function Signup() {
     }
 
     // ✅ Handle Signup API Call
-    async function handleCreateAccount() {
-        console.log("formData: ", formData);
+    async function handleCreateAccount(e: any) {
+        e.preventDefault();
 
         // Basic validation
         if (!formData.name || !formData.email || !formData.password) {
@@ -73,7 +73,7 @@ export default function Signup() {
                     Create your account here to access all the features of this website!
                 </p>
             </div>
-            <form className="flex flex-col gap-3">
+            <form className="flex flex-col gap-3" onSubmit={handleCreateAccount}>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-left">
                         Name <span className="text-red-700 text-lg">*</span>
@@ -127,11 +127,7 @@ export default function Signup() {
                     />
                 </div>
 
-                <button
-                    type="button"
-                    onClick={handleCreateAccount}
-                    disabled={loading}
-                    className={`w-[80%] md:w-[60%] mx-auto py-3 px-4 border rounded-lg bg-black text-white hover:opacity-75 ${loading && 'opacity-50 cursor-not-allowed'}`}
+                <button type="submit" disabled={loading} className={`w-[80%] md:w-[60%] mx-auto py-3 px-4 border rounded-lg bg-black text-white hover:opacity-75 ${loading && 'opacity-50 cursor-not-allowed'}`}
                 >
                     {loading ? 'Creating Account...' : 'Create Account'}
                 </button>

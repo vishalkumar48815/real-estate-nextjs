@@ -18,7 +18,6 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
-        <SmoothCursor />
       </body>
     </html>
   );

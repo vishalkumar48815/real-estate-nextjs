@@ -18,12 +18,13 @@ export default function LoginForm() {
     function handleInputChange(event: any) {
         let id = event.target.id;
         let value = event.target.value;
-
+        
         setError("");
         setFormData(state => ({ ...state, [id]: value }))
     }
-
-    async function handleLogin() {
+    
+    async function handleLogin(e: any) {
+        e.preventDefault();
         setLoading(true)
         const { email, password } = formData
         console.log("formData: ", formData)
@@ -53,7 +54,7 @@ export default function LoginForm() {
         }
     }
 
-    return <form className="flex flex-col gap-3">
+    return <form onSubmit={handleLogin} className="flex flex-col gap-3">
         {error && <span className="text-lg text-red-600">{error}</span>}
         <div className="flex flex-col gap-2">
             <label htmlFor="email" className="text-left">Email <span className="text-red-700 text-lg">*</span></label>
@@ -66,7 +67,7 @@ export default function LoginForm() {
             </div>
             <input id="password" name="password" className="border border-gray-200 rounded-lg p-2" placeholder="Enter your password" type="password" onChange={handleInputChange} />
         </div>
-        <button className="w-[80%] md:w-[60%] mx-auto py-3 px-4 border rounded-lg bg-black text-[#ffffff] hover:opacity-75" type="button" onClick={handleLogin}>Login</button>
+        <button className="w-[80%] md:w-[60%] mx-auto py-3 px-4 border rounded-lg bg-black text-[#ffffff] hover:opacity-75" type="submit">Login</button>
         <div className="flex gap-1 justify-center">
             <span className="text-gray-400 hover:border-b-1 border-gray-400 font-medium">Does not have an Account? </span>
             <Link href="/signup" >Sign up</Link>
