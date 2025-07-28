@@ -25,17 +25,22 @@ export async function POST(request) {
     const token = await generateToken({ id: newUser._id });
 
     // ✅ remove password before sending user
-    const { password: _, ...userWithoutPassword } = newUser.toObject();
+    const userWithoutPassword = newUser.toObject();
+    delete userWithoutPassword.password;
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       { token, user: userWithoutPassword },
       { status: 201 }
-    ).cookies.set("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-      });
+    );
+    
+    response.cookies.set("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+    });
+
+    return response;
 
   } catch (error) {
     if (error.code === 11000) {

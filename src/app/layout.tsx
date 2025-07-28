@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 export const metadata: Metadata = {
   title: "Real-estate-App",

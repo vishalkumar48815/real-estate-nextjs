@@ -15,15 +15,15 @@ export default function LoginForm() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    function handleInputChange(event: any) {
-        let id = event.target.id;
-        let value = event.target.value;
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const id = event.target.id;
+        const value = event.target.value;
         
         setError("");
         setFormData(state => ({ ...state, [id]: value }))
     }
     
-    async function handleLogin(e: any) {
+    async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setLoading(true)
         const { email, password } = formData
@@ -67,7 +67,13 @@ export default function LoginForm() {
             </div>
             <input id="password" name="password" className="border border-gray-200 rounded-lg p-2" placeholder="Enter your password" type="password" onChange={handleInputChange} />
         </div>
-        <button className="w-[80%] md:w-[60%] mx-auto py-3 px-4 border rounded-lg bg-black text-[#ffffff] hover:opacity-75" type="submit">Login</button>
+        <button 
+            className="w-[80%] md:w-[60%] mx-auto py-3 px-4 border rounded-lg bg-black text-[#ffffff] hover:opacity-75" 
+            type="submit"
+            disabled={loading}
+        >
+            {loading ? 'Logging in...' : 'Login'}
+        </button>
         <div className="flex gap-1 justify-center">
             <span className="text-gray-400 hover:border-b-1 border-gray-400 font-medium">Does not have an Account? </span>
             <Link href="/signup" >Sign up</Link>

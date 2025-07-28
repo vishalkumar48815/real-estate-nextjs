@@ -30,7 +30,7 @@ export default function Signup() {
     }
 
     // ✅ Handle Signup API Call
-    async function handleCreateAccount(e: any) {
+    async function handleCreateAccount(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
         // Basic validation

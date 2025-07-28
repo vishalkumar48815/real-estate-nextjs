@@ -20,7 +20,7 @@ const HeroSearchBar = () => {
   const propertyTypes = [ "Room", "1BHK", "2BHK", "3BHK", "4BHK", "PG", "Office Space", "Shop", "Sharing"] as string[];
 
   const handleSearch = () => {
-    const query: any = {};
+    const query: Record<string, string> = {};
     if (location) query.location = location;
     if (purpose) query.purpose = purpose;
     if (propertyType) query.type = propertyType;

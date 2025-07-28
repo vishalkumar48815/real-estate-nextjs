@@ -6,7 +6,6 @@ import { Drawer } from "antd";
 import NavbarList from "./navbar-list";
 import { Button } from "./ui/button";
 import { MenuOutlined } from "@ant-design/icons";
-import Image from "next/image";
 
 
 const Navbar = () => {
