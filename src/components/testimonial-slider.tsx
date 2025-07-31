@@ -18,8 +18,8 @@ export function TestimonialSlider() {
                     <BorderBeam duration={8} size={50} borderWidth={1.5} />
 
                 </ShimmerButton>
-                <h1 className="font-bold text-5xl md:text:2xl">What our Users are Saying</h1>
-                <p className="text-neutral-400 text-lg">Here&apos;s what some of our users have to say about Trust Nest.</p>
+                <h1 className="font-bold text-2xl md:text-5xl text-center">What our Users are Saying</h1>
+                <p className="text-neutral-400 text-center text-sm sm:text-lg px-2">Here&apos;s what some of our users have to say about Trust Nest.</p>
             </div>
             <div className="relative flex w-full flex-col items-center justify-center overflow-hidden  max-w-5xl mx-auto rounded-xl py-5">
                 <Marquee pauseOnHover className="[--duration:15s]">

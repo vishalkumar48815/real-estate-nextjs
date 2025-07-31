@@ -17,9 +17,9 @@ export default function FeaturedProperties() {
   const currentProperties = properties.slice(start, start + itemsPerPage);
 
   return (
-    <section className="py-2 max-w-8xl mx-auto">
+    <section className="pb-2 max-w-8xl mx-auto">
       <div className="flex items-center justify-between px-4 py-2 md:px-6">
-        <h2 className="text-2xl font-semibold my-4">Featured Properties</h2>
+        <h2 className="text-sm sm:text-2xl font-semibold my-4">Featured Properties</h2>
 
         <div className="flex gap-2 items-center">
           <Button title="Saved" variant="outline">

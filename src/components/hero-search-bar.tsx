@@ -36,7 +36,6 @@ const HeroSearchBar = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-3 max-w-4xl mx-auto p-4">
-      {/* Location Input */}
       <Input
         placeholder="Enter location"
         value={location}
@@ -44,7 +43,6 @@ const HeroSearchBar = () => {
         className="w-full md:w-64 bg-white"
       />
 
-      {/* Purpose Dropdown */}
       <Select value={purpose} onValueChange={(value) => setPurpose(value)}>
         <SelectTrigger className="w-full md:w-32 bg-white">
           <SelectValue placeholder="Purpose" className="bg-white" />
@@ -60,7 +58,6 @@ const HeroSearchBar = () => {
         </Button>
       )}
 
-      {/* Property Type Dropdown */}
       <Select value={propertyType} onValueChange={(value) => setPropertyType(value)}>
         <SelectTrigger className="w-full md:w-40 bg-white">
           <SelectValue className="bg-white" placeholder="Property Type"  />
@@ -79,10 +76,7 @@ const HeroSearchBar = () => {
         </Button>
       )}
 
-      {/* Search Button */}
-      <Button onClick={handleSearch} className="w-full md:w-auto">
-        Search
-      </Button>
+      <Button onClick={handleSearch} className="w-full md:w-auto">Search</Button>
     </div>
   );
 };

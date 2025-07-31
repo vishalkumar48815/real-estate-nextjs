@@ -63,7 +63,7 @@ export default function LoginForm() {
         <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
                 <label htmlFor="password" className="text-left">Password <span className="text-red-700 text-lg">*</span></label>
-                <Link href="/login/forget-password" ><span className="text-gray-400 hover:border-b-1 border-gray-400 font-medium">Forget password?</span></Link>
+                <Link href="/forget-password" ><span className="text-gray-400 hover:border-b-1 border-gray-400 font-medium">Forget password?</span></Link>
             </div>
             <input id="password" name="password" className="border border-gray-200 rounded-lg p-2" placeholder="Enter your password" type="password" onChange={handleInputChange} />
         </div>

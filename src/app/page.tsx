@@ -5,11 +5,13 @@ import Footer from "@/components/footer";
 
 export default function Home() {
   return <>
-    <main className="w-full px-4 sm:px-6 lg:px-8">
+    <main className="w-full">
       <HeroSection />
-      <FeaturedProperties />
-      <TestimonialSlider />
+      <div className="px-4 sm:px-6 lg:px-8">
+        <FeaturedProperties />
+        <TestimonialSlider />
+      </div>
     </main>
-      <Footer />
+    <Footer />
   </>
 }

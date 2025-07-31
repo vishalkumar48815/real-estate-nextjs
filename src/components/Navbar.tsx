@@ -6,6 +6,7 @@ import { Drawer } from "antd";
 import NavbarList from "./navbar-list";
 import { Button } from "./ui/button";
 import { MenuOutlined } from "@ant-design/icons";
+import NavbarDock from "./navbar-dock";
 
 
 const Navbar = () => {
@@ -21,18 +22,23 @@ const Navbar = () => {
 
     return <>
         <main>
-            <div className="flex justify-between gap-3 items-center p-4 max-w-[95%] m-auto">
-                <Logo />
-                <div className="flex gap-3 items-center">
-                    <nav className="items-center hidden md:block">
-                        <NavbarList />
-                    </nav>
+            <div className="flex justify-between gap-3 items-center p-2 sm:p-4 max-w-[98%] sm:max-w-[95%] md:w-full md:p-0 m-auto">
+                <div className="w-[150] h-[100] sm:w-[180] sm:h-[140] block lg:hidden">
+                    <Logo />
+                </div>
+                <div className="flex gap-3 items-center w-[80%] md:w-full justify-end lg:justify-center mx-auto">
+                    {/* <nav className="items-center hidden md:block">
+                        <NavbarList onClose={onClose} />
+                    </nav> */}
+                    <div className="items-center hidden lg:block fixed top-0 z-40 w-full">
+                        <NavbarDock onClose={onClose} />
+                    </div>
                     <Button variant={"outline"} title="Menu" className="block md:hidden" onClick={showDrawer}>
-                    <MenuOutlined />
+                        <MenuOutlined />
                     </Button>
-                    <Drawer className="block md:hiddenx" title="Menu" closable={{ 'aria-label': 'Close Button' }} onClose={onClose} open={open} width={"80%"} >
+                    <Drawer className="block lg:hidden" title="Menu" closable={{ 'aria-label': 'Close Button' }} onClose={onClose} open={open} width={"80%"} >
                         <nav className="items-center block md:hidden">
-                            <NavbarList />
+                            <NavbarList onClose={onClose} />
                         </nav>
                     </Drawer>
                 </div>
