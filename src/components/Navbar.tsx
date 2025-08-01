@@ -23,7 +23,7 @@ const Navbar = () => {
     return <>
         <main>
             <div className="flex justify-between gap-3 items-center p-2 sm:p-4 max-w-[98%] sm:max-w-[95%] md:w-full md:p-0 m-auto">
-                <div className="w-[150] h-[100] sm:w-[180] sm:h-[140] block lg:hidden">
+                <div className="w-[10%] h-[10%] sm:w-[14%] sm:h-[14%] block lg:hidden">
                     <Logo />
                 </div>
                 <div className="flex gap-3 items-center w-[80%] md:w-full justify-end lg:justify-center mx-auto">
