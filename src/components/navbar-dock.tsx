@@ -89,7 +89,7 @@ export default function NavbarDock({ onClose }: NavbarListProps) {
         const token = localStorage.getItem('token') as string;
         setToken(token);
         if (onClose) onClose()
-    }, [currentPath, onClose]);
+    }, [currentPath]);
 
     return (
         <div className="relative">

@@ -36,7 +36,7 @@ export default function NavbarList({ onClose }: NavbarListProps) {
         const token = localStorage.getItem('token') as string;
         setToken(token);
         if (onClose) onClose()
-    }, [currentPath, onClose]);
+    }, [currentPath]);
 
     function handleLogout() {
         fetch('/api/auth/signout', {
