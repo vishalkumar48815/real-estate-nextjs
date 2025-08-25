@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { FaBed, FaBath } from "react-icons/fa";
 import PropertyImageBadge from "./property-image-badge";
-import { Lens } from "./magicui/lens";
 import Link from "next/link";
+import { motion } from 'framer-motion'
 
 export type Property = {
   id: string | number;
@@ -34,15 +34,16 @@ export type Property = {
 export default function PropertyCard({ property }: { property: Property }) {
   return (
     <Link href={`/listings/${property.id}`}>
+      <motion.div
+        className="rounded-xl bg-white/5 backdrop-blur-md shadow-md hover:shadow-xl transition-all"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        whileHover={{ scale: 1.03 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.2}}
+      >
       <Card className="rounded-xl py-0 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-        <Lens
-          zoomFactor={2}
-          lensSize={100}
-          isStatic={false}
-          ariaLabel="Zoom Area"
-        >
           <PropertyImageBadge image={property.heroImage} purpose={property.purpose} />
-        </Lens>
         <CardContent className="p-4">
           <div className="text-lg font-semibold mb-1 overflow-ellipsis overflow-hidden whitespace-nowrap">{property.title}</div>
           <div className="text-sm text-gray-600 flex gap-2 items-center mb-1">
@@ -56,6 +57,7 @@ export default function PropertyCard({ property }: { property: Property }) {
           <div className="text-sm text-gray-500">{property.location}</div>
         </CardContent>
       </Card>
+      </motion.div>
     </Link>
   );
 }

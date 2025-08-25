@@ -2,7 +2,7 @@
 
 import { BadgeInfo, Bell, Building2, HomeIcon, LogIn, LogOut, User, MessagesSquare } from "lucide-react";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -16,30 +16,17 @@ import { Dock, DockIcon } from "@/components/magicui/dock";
 import Logo from "./Logo";
 import { Dropdown, MenuProps } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { redirect, usePathname } from "next/navigation";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 type NavbarListProps = {
+    token: string
     onClose?: () => void;
+    handleLogout?: () => void;
 };
 
 
-export default function NavbarDock({ onClose }: NavbarListProps) {
-    const currentPath = usePathname();
-    const [token, setToken] = useState<string>("");
-
-    const handleLogout = useCallback(() => {
-        fetch('/api/auth/signout', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }
-        }).then(() => {
-            localStorage.removeItem("token")
-            setToken("");
-            redirect('/')
-        })
-    }, []);
-
+export default function NavbarDock({ token, handleLogout }: NavbarListProps) {
     const items: MenuProps['items'] = [
         {
             key: '1',
@@ -84,12 +71,6 @@ export default function NavbarDock({ onClose }: NavbarListProps) {
             { href: "/login", icon: <p className="flex gap-1 w-fit items-center"><LogIn /> <span>Login</span></p>, label: "Login/Signup", id: "login-logout-icon", public: false, tokenCheck: false }
         ],
     };
-
-    useEffect(() => {
-        const token = localStorage.getItem('token') as string;
-        setToken(token);
-        if (onClose) onClose()
-    }, [currentPath]);
 
     return (
         <div className="relative">

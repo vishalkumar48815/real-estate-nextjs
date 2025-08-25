@@ -8,8 +8,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { listings } from "@/lib/data/listings";
 import PaginationComponent from "./pagination-component";
-import { Popconfirm, message } from "antd";
+import { Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import { toast } from "sonner";
 
 const itemsPerPage = 6;
 
@@ -23,7 +24,7 @@ export default function MyListingsPage() {
 
     const handleDelete = (id: string) => {
         setListingData((prev) => prev.filter((item) => item.id !== id));
-        message.success("Listing deleted successfully");
+        toast.success("Listing deleted successfully");
     };
 
     return (

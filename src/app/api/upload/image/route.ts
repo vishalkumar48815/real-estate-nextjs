@@ -1,17 +1,42 @@
-import { put } from '@vercel/blob';
-import { NextResponse } from 'next/server';
+import { del, put } from "@vercel/blob";
+import { NextResponse } from "next/server";
 
-export async function POST(request: Request): Promise<NextResponse> {
-if(!request) return NextResponse.json({error: "Wrong request!"})
-  const { searchParams } = new URL(request.url);
-  const filename = searchParams.get('filename') as string;
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb",
+    },
+  },
+};
 
-  if (!request.body) {
-   return NextResponse.json({error: "Request body is missing"});
+export async function POST(req: Request) {
+
+  try {
+    let request = await req.json()
+    const { file, name, type } = request as { file: string; name: string; type: string };
+    const buffer = Buffer.from(file.split(",")[1], "base64");
+
+    const blob = await put(`images/${Date.now()}-${name}`, buffer, {
+      access: "public",
+      contentType: type,
+    });
+
+    return NextResponse.json({data: { url: blob.url }}, {status: 200});
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Upload failed" }, {status: 500});
   }
-  const blob = await put(filename, request.body as ReadableStream<Uint8Array>, {
-    access: 'public',
-  });
+}
 
-  return NextResponse.json(blob);
+
+export async function DELETE(req: Request) {
+  try {
+    const { url } = await req.json();
+    await del(url);
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Delete failed" }, { status: 500 });
+  }
 }

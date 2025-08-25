@@ -3,15 +3,17 @@ import { redirect, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Avatar, Dropdown, MenuProps } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { logout } from "@/services/auth";
 
 
 type NavbarListProps = {
     onClose?: () => void;
+    token: string
+    handleLogout?: () => void;
 };
 
-export default function NavbarList({ onClose }: NavbarListProps) {
+export default function NavbarList({ token, onClose, handleLogout }: NavbarListProps) {
     const currentPath = usePathname();
-    const [token, setToken] = useState<string>("");
 
     const items: MenuProps['items'] = [
         {
@@ -32,27 +34,9 @@ export default function NavbarList({ onClose }: NavbarListProps) {
         }
     ];
 
-    useEffect(() => {
-        const token = localStorage.getItem('token') as string;
-        setToken(token);
-        if (onClose) onClose()
-    }, [currentPath]);
-
-    function handleLogout() {
-        fetch('/api/auth/signout', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }
-        }).then(() => {
-            localStorage.removeItem("token")
-            setToken("");
-            redirect('/')
-        })
-    }
-
     function linkClass(path: string, currentPath: string) {
         return (path === currentPath ? "text-lg font-bold border-b-3 border-0 border-blue-500 shadow-b-xl" : "text-md text-gray-700") + " px-2 py-1";
     }
-
 
     return <ul className="flex gap-2 sm:gap-3 md:items-center flex-col md:flex-row" style={{ marginBottom: 0 }}>
         <Link href="/" className={linkClass('/', currentPath)}>Home</Link>
@@ -65,7 +49,7 @@ export default function NavbarList({ onClose }: NavbarListProps) {
         {!token && <Link href="/login" className={linkClass('/login', currentPath)}>Sign in</Link>}
         {token && <Dropdown menu={{ items }}>
             <div className="px-2 py-1 w-fit flex items-center">
-            <Avatar size={25} icon={<UserOutlined />} />
+                <Avatar size={25} icon={<UserOutlined />} />
             </div>
         </Dropdown>}
     </ul>

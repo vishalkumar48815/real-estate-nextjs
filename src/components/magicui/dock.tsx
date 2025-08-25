@@ -70,36 +70,31 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     }, []);
 
     const renderChildren = () => {
-      // Convert children to array for easier manipulation
       const childrenArray = React.Children.toArray(children);
 
-      // Filter only DockIcon elements
       const dockIcons = childrenArray.filter(
         (child) =>
           React.isValidElement(child) && child.type === DockIcon
       );
 
-      // Find non-DockIcon children (if you want to support them)
       const otherChildren = childrenArray.filter(
         (child) =>
           !(React.isValidElement(child) && child.type === DockIcon)
       );
 
-      // Split DockIcons into left and right groups
-      const leftIcons = dockIcons.slice(0, -2); // all except last two
-      const rightIcons = dockIcons.slice(-2);   // last two
+      const leftIcons = dockIcons.slice(0, 1);
+      const rightIcons = dockIcons.slice(1);
 
-      // Helper to clone with props
       const cloneIcons = (icons: React.ReactNode[]) =>
         icons.map((child: React.ReactNode, idx: number) =>
           React.isValidElement(child)
             ? React.cloneElement(child as React.ReactElement<DockIconProps>, {
-                mouseX,
-                size: iconSize,
-                magnification: iconMagnification,
-                distance: iconDistance,
-                key: idx,
-              })
+              mouseX,
+              size: iconSize,
+              magnification: iconMagnification,
+              distance: iconDistance,
+              key: idx,
+            })
             : child
         );
 
@@ -135,25 +130,28 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
       >
         {/* Background that slides down */}
         <motion.div
-          className="absolute left-1/2 bg-white/90 dark:bg-gray-900/100 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-lg"
-          initial={{ 
+          className="absolute left-1/2 border-0 rounded-[10px]"
+          initial={{
             top: '-160%',
             width: '0%'
           }}
-          animate={{ 
+          animate={{
             top: hasBackground ? '0%' : '-160%',
             width: hasBackground ? '100%' : '0%'
           }}
-          transition={{ 
+          transition={{
             top: { duration: 0.4, ease: "easeInOut", delay: hasBackground ? 0.1 : 0 },
             width: { duration: 0.4, ease: "easeInOut", delay: hasBackground ? 0.1 : 0 }
           }}
           style={{
             transform: `translateX(-50%)`,
             height: '100%',
+            background: "#ffffff80",
+            boxShadow: "0 1px #7878781a inset, 0 0 30px #2a2a2a17, 0 0 40px 20px #4f39f608, 0 0 0 1px #ffffff4d inset",
+            backdropFilter: "blur(14px)"
           }}
         />
-        
+
         {/* Content container */}
         <div className="relative z-10 flex items-center justify-between gap-2 w-full">
           {renderChildren()}

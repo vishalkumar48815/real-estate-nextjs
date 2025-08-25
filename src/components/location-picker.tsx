@@ -29,13 +29,10 @@ export default function LocationPicker({ onChange }: AutoLocationPickerProps) {
   }, [address, onChange]);
 
   return (
-    <div className="space-y-2">
-      <Label>Location</Label>
       <Input
         placeholder="Search for a location"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
       />
-    </div>
   );
 }

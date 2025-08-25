@@ -1,5 +1,6 @@
 'use client';
 
+import { login } from "@/services/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,31 +19,25 @@ export default function LoginForm() {
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         const id = event.target.id;
         const value = event.target.value;
-        
+
         setError("");
         setFormData(state => ({ ...state, [id]: value }))
     }
-    
+
     async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setLoading(true)
         const { email, password } = formData
-        console.log("formData: ", formData)
         if (!email || !password) {
             setError("Please enter valid credentials!")
             return
         }
 
         try {
-            const response = await fetch('/api/auth/signin', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            })
-
-            const result = await response.json();
-            if (response.ok) {
-                localStorage.setItem("token", result.token);
+            const response = await login(formData)
+            if (response.status === 200) {
+                localStorage.setItem("token", response.data.accessToken);
+                localStorage.setItem("user", JSON.stringify(response.data));
                 router.push('/')
             }
 
@@ -67,8 +62,8 @@ export default function LoginForm() {
             </div>
             <input id="password" name="password" className="border border-gray-200 rounded-lg p-2" placeholder="Enter your password" type="password" onChange={handleInputChange} />
         </div>
-        <button 
-            className="w-[80%] md:w-[60%] mx-auto py-3 px-4 border rounded-lg bg-black text-[#ffffff] hover:opacity-75" 
+        <button
+            className="w-[80%] md:w-[60%] mx-auto py-3 px-4 border rounded-lg bg-black text-[#ffffff] hover:opacity-75"
             type="submit"
             disabled={loading}
         >

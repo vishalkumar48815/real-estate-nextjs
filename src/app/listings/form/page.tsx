@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import ListingForm from "@/components/listing-form";
 import { listings } from "@/lib/data/listings";
 import { Property } from "@/components/properties-card";
+import Logo from "@/components/Logo";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ListingFormPage() {
   const searchParams = useSearchParams();
@@ -18,16 +20,16 @@ export default function ListingFormPage() {
     title: "",
     location: "",
     contact: {
-        name: "",
-        email: "",
-        phone: ""
+      name: "",
+      email: "",
+      phone: ""
     },
     description: "",
     features: [],
     postedOn: "",
     locationCoords: {
-        lng: 0,
-        lat: 0 
+      lng: 0,
+      lat: 0
     },
     images: [],
     heroImage: "",
@@ -51,21 +53,30 @@ export default function ListingFormPage() {
     }
   }, [isEdit, listingId]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (formData: Property) => {
     if (isEdit) {
       toast.success("Listing updated successfully!");
     } else {
       toast.success("Listing created successfully!");
     }
-    console.log("Form submitted:", form);
+    console.log("Form submitted:", formData);
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 py-6 lg:pt-30 lg:pb-10">
-      <ListingForm
-        defaultData={form}
-        onSubmit={handleSubmit}
-      />
-    </div>
+    <main className="py-6 lg:pt-30 lg:pb-10">
+      <div className="flex flex-row justify-center">
+        <Logo />
+      </div>
+      <Card className="max-w-xl text-center p-4" style={{ margin: "20px auto 40px auto" }}>
+        <CardHeader>
+          <CardTitle className="text-left text-xl font-semibold">Create a Listing</CardTitle>
+          <CardDescription className="text-gray-400 text-left font-medium">You can list you property for Rent or Sale here.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ListingForm defaultData={form} onSubmit={handleSubmit} />
+        </CardContent>
+        {/* <BorderBeam duration={5} size={300} /> */}
+      </Card>
+    </main>
   );
 }
