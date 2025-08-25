@@ -34,7 +34,6 @@ const ListingForm: React.FC<ListingFormProps> = ({ defaultData = {}, onSubmit })
   }, []);
 
   const handleChange = (field: keyof Property, value: unknown) => {
-    console.log("formData: ", formData.images)
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -73,15 +72,18 @@ const ListingForm: React.FC<ListingFormProps> = ({ defaultData = {}, onSubmit })
               className="w-full text-start p-4"
               placeholder="Search to Select"
               optionFilterProp="label"
-              filterSort={(optionA: listingTypes, optionB: listingTypes) =>
-                (optionA?.type ?? '').toLowerCase().localeCompare((optionB?.type ?? '').toLowerCase())
+              filterSort={(optionA, optionB) =>
+                (optionA?.label as string)
+                  .toLowerCase()
+                  .localeCompare((optionB?.label as string).toLowerCase())
               }
-              options={listingTypes.map((item: listingTypes) => ({
+              options={listingTypes.map((item) => ({
                 value: item.name,
-                label: item.name
-              })) as any}
-              onChange={(value) => handleChange("type", value)}
+                label: item.name,
+              }))}
+              onChange={(value: string) => handleChange("type", value)}
             />
+
           </Flex>
         </Col>
       </Row>
@@ -139,7 +141,7 @@ const ListingForm: React.FC<ListingFormProps> = ({ defaultData = {}, onSubmit })
         <Col xs={24} md={12}>
           <Flex gap="middle" vertical align="start">
             <label className="text-sm font-medium">Price</label>
-            <Input type="number" min={1}placeholder="Price" value={formData.price || ""}
+            <Input type="number" min={1} placeholder="Price" value={formData.price || ""}
               onChange={(e) => handleChange("price", e.target.value)}
             />
           </Flex>

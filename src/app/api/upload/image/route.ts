@@ -12,7 +12,7 @@ export const config = {
 export async function POST(req: Request) {
 
   try {
-    let request = await req.json()
+    const request = await req.json()
     const { file, name, type } = request as { file: string; name: string; type: string };
     const buffer = Buffer.from(file.split(",")[1], "base64");
 

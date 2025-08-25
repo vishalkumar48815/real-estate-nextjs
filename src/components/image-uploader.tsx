@@ -73,6 +73,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
       {previewImage && (
         <Image
           wrapperStyle={{ display: "none" }}
+          alt="Listing Image"
           preview={{
             visible: previewOpen,
             onVisibleChange: (visible) => setPreviewOpen(visible),

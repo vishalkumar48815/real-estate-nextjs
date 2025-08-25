@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { redirect, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Avatar, Dropdown, MenuProps } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { logout } from "@/services/auth";
+// import { logout } from "@/services/auth";
 
 
 type NavbarListProps = {
@@ -12,7 +11,7 @@ type NavbarListProps = {
     handleLogout?: () => void;
 };
 
-export default function NavbarList({ token, onClose, handleLogout }: NavbarListProps) {
+export default function NavbarList({ token, handleLogout }: NavbarListProps) {
     const currentPath = usePathname();
 
     const items: MenuProps['items'] = [

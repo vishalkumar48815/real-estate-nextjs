@@ -7,6 +7,7 @@ import { Carousel } from "antd";
 import { BadgeCheck, MapPin, Ruler, Building2, Clock, Star } from "lucide-react";
 import { Property } from "@/components/properties-card";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const Map = dynamic(() => import("./map"), { ssr: false });
 
@@ -24,7 +25,7 @@ export default function PropertyDetails({ property }: { property: Property }) {
             {/* Image Carousel */}
             <Carousel autoplay className="rounded-xl overflow-hidden">
                 {property.images.map((src, index) => (
-                    <img
+                    <Image
                         key={index}
                         src={src}
                         className="w-full object-cover h-[400px]"
